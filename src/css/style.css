@@ -170,11 +170,25 @@ button {
 
 /* Styles for product lists */
 .product-card {
+  position: relative;
   flex: 1 1 45%;
   margin: 0.25em;
   padding: 0.5em;
   border: 1px solid var(--light-grey);
   max-width: 250px;
+}
+
+.product-card__discount-flag {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background-color: #d9534f;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 4px;
+  z-index: 1;
 }
 
 .product-card h2,
