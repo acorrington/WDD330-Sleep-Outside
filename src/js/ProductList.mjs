@@ -1,5 +1,9 @@
 import { renderListWithTemplate } from "./utils.mjs";
 
+// this function generates the HTML of a product card
+// receives an object "product" with its properties (name, price, image, etc.) and returns a
+// string of HTML for one <li> card
+
 function productCardTemplate(product) {
     const isDiscounted = product.FinalPrice < product.SuggestedRetailPrice;
 
