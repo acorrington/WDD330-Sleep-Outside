@@ -5,6 +5,14 @@ function renderCartContents() {
   if (!Array.isArray(cartItems)) {
     cartItems = cartItems ? [cartItems] : [];
   }
+
+  // if the cart is empty, show a friendly message instead of a blank page
+  if (cartItems.length === 0) {
+    document.querySelector(".product-list").innerHTML =
+      `<li class="cart-empty-message">Your cart is empty. <a href="/index.html">Continue shopping</a></li>`;
+    return;
+  }
+
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
 }
