@@ -28,6 +28,10 @@ export function getParam(param) {
   return urlParams.get(param);
 }
 
+// generic reusable function to render any list of items into the DOM
+// receives: the template function, the target element, the data list,
+// where to insert it (default "afterbegin"), and whether to clear first (default false)
+
 export function renderListWithTemplate(
   templateFn,
   parentElement,
