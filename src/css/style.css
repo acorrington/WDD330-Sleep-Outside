@@ -260,6 +260,29 @@ button {
   grid-column: 4;
 }
 
+.category-list {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  list-style: none;
+  padding: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.category-card {
+  text-align: center;
+}
+
+.category-card img {
+  width: 80px;
+  height: 80px;
+}
+
+.category-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

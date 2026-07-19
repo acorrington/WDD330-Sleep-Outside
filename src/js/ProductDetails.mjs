@@ -30,7 +30,7 @@ export default class ProductDetails {
         qs("#productBrand").textContent = this.product.Brand.Name;
 
         const productImage = qs("#productImage");
-        productImage.src = this.product.Image;
+        productImage.src = this.product.Images.PrimaryLarge;
         productImage.alt = this.product.NameWithoutBrand;
 
         qs("#productPrice").textContent = this.product.FinalPrice;
