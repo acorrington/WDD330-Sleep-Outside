@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -281,6 +281,12 @@ button {
 .category-card a {
   text-decoration: none;
   color: inherit;
+}
+
+.product__discount {
+  color: #d9534f;
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 
 @media screen and (min-width: 500px) {

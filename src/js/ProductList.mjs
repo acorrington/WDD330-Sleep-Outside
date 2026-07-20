@@ -9,7 +9,7 @@ function productCardTemplate(product) {
 
     return `
     <li class="product-card">
-      <a href="product_pages/?product=${product.Id}">
+      <a href="/product_pages/?product=${product.Id}">
         ${isDiscounted ? '<span class="product-card__discount-flag">Sale</span>' : ""}
         <img src="${product.Images.PrimaryMedium}" alt="${product.Name}">
         <h2>${product.Brand.Name}</h2>

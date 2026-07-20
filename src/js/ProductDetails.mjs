@@ -38,6 +38,25 @@ export default class ProductDetails {
         qs("#productDescription").innerHTML = this.product.DescriptionHtmlSimple;
 
         qs("#addToCart").dataset.id = this.product.Id;
+        this.renderDiscount();
+
+    }
+
+    renderDiscount() {
+        const discountElement = qs("#productDiscount");
+        const { FinalPrice, SuggestedRetailPrice } = this.product;
+
+        if (FinalPrice < SuggestedRetailPrice) {
+            const amountOff = (SuggestedRetailPrice - FinalPrice).toFixed(2);
+            const percentOff = Math.round(
+                ((SuggestedRetailPrice - FinalPrice) / SuggestedRetailPrice) * 100
+            );
+            discountElement.textContent = `Save $${amountOff} (${percentOff}% off)`;
+            discountElement.hidden = false;
+        } else {
+            discountElement.hidden = true;
+        }
+
     }
 }
 
