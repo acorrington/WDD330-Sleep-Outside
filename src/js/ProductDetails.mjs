@@ -30,7 +30,7 @@ export default class ProductDetails {
         qs("#productBrand").textContent = this.product.Brand.Name;
 
         const productImage = qs("#productImage");
-        productImage.src = this.product.Image;
+        productImage.src = this.product.Images.PrimaryLarge;
         productImage.alt = this.product.NameWithoutBrand;
 
         qs("#productPrice").textContent = this.product.FinalPrice;
@@ -38,6 +38,25 @@ export default class ProductDetails {
         qs("#productDescription").innerHTML = this.product.DescriptionHtmlSimple;
 
         qs("#addToCart").dataset.id = this.product.Id;
+        this.renderDiscount();
+
+    }
+
+    renderDiscount() {
+        const discountElement = qs("#productDiscount");
+        const { FinalPrice, SuggestedRetailPrice } = this.product;
+
+        if (FinalPrice < SuggestedRetailPrice) {
+            const amountOff = (SuggestedRetailPrice - FinalPrice).toFixed(2);
+            const percentOff = Math.round(
+                ((SuggestedRetailPrice - FinalPrice) / SuggestedRetailPrice) * 100
+            );
+            discountElement.textContent = `Save $${amountOff} (${percentOff}% off)`;
+            discountElement.hidden = false;
+        } else {
+            discountElement.hidden = true;
+        }
+
     }
 }
 

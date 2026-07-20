@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -258,6 +258,35 @@ button {
 .cart-card__remove {
   grid-row: 1;
   grid-column: 4;
+}
+
+.category-list {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  list-style: none;
+  padding: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.category-card {
+  text-align: center;
+}
+
+.category-card img {
+  width: 80px;
+  height: 80px;
+}
+
+.category-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.product__discount {
+  color: #d9534f;
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 
 @media screen and (min-width: 500px) {
