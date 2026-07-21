@@ -1,9 +1,40 @@
 import { getLocalStorage } from "./utils.mjs";
 
 function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart");
+  let cartItems = getLocalStorage("so-cart");
+  if (!Array.isArray(cartItems)) {
+    cartItems = cartItems ? [cartItems] : [];
+  }
+
+  // if the cart is empty, show a friendly message instead of a blank page
+  if (cartItems.length === 0) {
+    document.querySelector(".product-list").innerHTML =
+      `<li class="cart-empty-message">Your cart is empty. <a href="/index.html">Continue shopping</a></li>`;
+    return;
+  }
+
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
+
+  // Add event listeners to the remove buttons
+  const removeButtons = document.querySelectorAll(".remove-item");
+  // Add event listeners to the remove buttons
+  removeButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      // Get the item ID from the button's data attribute
+      const itemId = button.dataset.id;
+      // Remove the item from the cart
+      cartItems = getLocalStorage("so-cart");
+      if (Array.isArray(cartItems)) {
+        cartItems = cartItems.filter((item) => item.Id !== itemId);
+        localStorage.setItem("so-cart", JSON.stringify(cartItems));
+      } else if (cartItems && cartItems.Id === itemId) {
+        localStorage.removeItem("so-cart");
+      }
+      // Re-render the cart
+      renderCartContents();
+    });
+  });
 }
 
 function cartItemTemplate(item) {
@@ -20,6 +51,9 @@ function cartItemTemplate(item) {
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: 1</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
+  <p class="cart-card__remove">
+    <a href="#" class="remove-item" data-id="${item.Id}"><span style="color: red;">&#10006;</span></a>
+  </p>
 </li>`;
 
   return newItem;
