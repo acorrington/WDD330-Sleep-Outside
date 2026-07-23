@@ -18,9 +18,18 @@ export default class ProductDetails {
             .addEventListener('click', this.addProductToCart.bind(this));
     }
     addProductToCart() {
-        const cart = getLocalStorage("so-cart") || [];
-        cart.push(this.product);
-        setLocalStorage("so-cart", cart);
+
+        const cartItems = getLocalStorage("so-cart") || [];
+        const existingIndex = cartItems.findIndex((item) => item.Id === this.product.Id);
+
+        if (existingIndex > -1) {
+            cartItems[existingIndex].quantity = (cartItems[existingIndex].quantity || 1) + 1;
+        } else {
+            this.product.quantity = 1;
+            cartItems.push(this.product);
+        }
+
+        setLocalStorage("so-cart", cartItems);
     }
     renderProductDetails() {
         productDetailsTemplate(this.product);

@@ -23,7 +23,10 @@ function renderCartContents() {
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
 
-  const total = cartItems.reduce((sum, item) => sum + item.FinalPrice, 0);
+  const total = cartItems.reduce(
+    (sum, item) => sum + item.FinalPrice * (item.quantity || 1),
+    0,
+  );
 
   if (cartFooter) {
     document.querySelector(".cart-total").innerHTML =
@@ -56,7 +59,7 @@ function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Image}"
+      src="${item.Images.PrimaryMedium}"
       alt="${item.Name}"
     />
   </a>
@@ -64,7 +67,7 @@ function cartItemTemplate(item) {
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: 1</p>
+  <p class="cart-card__quantity">qty: ${item.quantity || 1}</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
   <p class="cart-card__remove">
     <a href="#" class="remove-item" data-id="${item.Id}"><span style="color: red;">&#10006;</span></a>
