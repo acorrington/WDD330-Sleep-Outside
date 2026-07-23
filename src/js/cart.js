@@ -8,24 +8,26 @@ function renderCartContents() {
     cartItems = cartItems ? [cartItems] : [];
   }
 
-  // if the cart is empty, show a friendly message instead of a blank page
+  const cartTotalElement = document.querySelector("#cart-total");
+
   if (cartItems.length === 0) {
     document.querySelector(".product-list").innerHTML =
       `<li class="cart-empty-message">Your cart is empty. <a href="/index.html">Continue shopping</a></li>`;
+    if (cartTotalElement) {
+      cartTotalElement.textContent = "";
+    }
     return;
   }
 
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
 
-  // Add event listeners to the remove buttons
+  renderCartTotal(cartItems);
+
   const removeButtons = document.querySelectorAll(".remove-item");
-  // Add event listeners to the remove buttons
   removeButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
-      // Get the item ID from the button's data attribute
       const itemId = button.dataset.id;
-      // Remove the item from the cart
       let cartItems = getLocalStorage("so-cart");
       if (Array.isArray(cartItems)) {
         cartItems = cartItems.filter((item) => item.Id !== itemId);
@@ -33,17 +35,24 @@ function renderCartContents() {
       } else if (cartItems && cartItems.Id === itemId) {
         localStorage.removeItem("so-cart");
       }
-      // Re-render the cart
       renderCartContents();
     });
   });
+}
+
+function renderCartTotal(cartItems) {
+  const total = cartItems.reduce((sum, item) => sum + item.FinalPrice, 0);
+  const cartTotalElement = document.querySelector("#cart-total");
+  if (cartTotalElement) {
+    cartTotalElement.textContent = `Total: $${total.toFixed(2)}`;
+  }
 }
 
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Image}"
+      src="${item.Images.PrimaryMedium}"
       alt="${item.Name}"
     />
   </a>
