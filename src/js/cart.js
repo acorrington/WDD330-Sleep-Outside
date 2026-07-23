@@ -35,7 +35,7 @@ function renderCartContents() {
   const removeButtons = document.querySelectorAll(".remove-item");
   // Add event listeners to the remove buttons
   removeButtons.forEach((button) => {
-    button.addEventListener("click", (e) => {
+    button.addEventListener("click", () => {
       // Get the item ID from the button's data attribute
       const itemId = button.dataset.id;
       // Remove the item from the cart
