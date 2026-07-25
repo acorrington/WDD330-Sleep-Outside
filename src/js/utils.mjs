@@ -54,22 +54,33 @@ export function renderWithTemplate(template, parentElement, data, callback) {
 }
 
 export async function loadTemplate(path) {
-  const response = await fetch(path);
-  const template = await response.text();
-  return template;
+  try {
+    const response = await fetch(path);
+    if (!response.ok) {
+      throw new Error(`Failed to load template: ${path} (status: ${response.status})`);
+    }
+    const template = await response.text();
+    return template;
+  } catch (error) {
+    console.error("Error loading template:", error);
+    return ""; // fallback: return empty string so the page doesn't crash
+  }
 }
 
 export async function loadHeaderFooter() {
-
   const headerTemplate = await loadTemplate("/partials/header.html");
   const footerTemplate = await loadTemplate("/partials/footer.html");
 
   const headerElement = document.querySelector("#header");
   const footerElement = document.querySelector("#footer");
 
+  if (!headerElement || !footerElement) {
+    console.error("Header or footer element not found in the DOM.");
+    return;
+  }
+
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
 }
-
 
 
