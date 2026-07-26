@@ -300,6 +300,61 @@ button {
   font-weight: bold;
 }
 
+.checkout-container {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.checkout-form {
+  flex: 2;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout-form fieldset {
+  margin-bottom: 1rem;
+}
+
+.checkout-form label {
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.checkout-form input {
+  width: 100%;
+  padding: 0.4rem;
+  margin-top: 0.25rem;
+}
+
+.order-summary {
+  flex: 1;
+  min-width: 200px;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.alert {
+  background-color: #f8d7da;
+  color: #842029;
+  border: 1px solid #f5c2c7;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alert-close {
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: 1rem;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

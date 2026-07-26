@@ -71,5 +71,21 @@ export async function loadHeaderFooter() {
   renderWithTemplate(footerTemplate, footerElement);
 }
 
+// displays a dismissible alert message at the top of <main>
+// scroll=true (default) scrolls the page to the top so mobile users see it
+export function alertMessage(message, scroll = true) {
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+  alert.innerHTML = `<p>${message}</p><span class="alert-close">&times;</span>`;
 
+  const main = document.querySelector("main");
+  main.prepend(alert);
 
+  alert.querySelector(".alert-close").addEventListener("click", () => {
+    alert.remove();
+  });
+
+  if (scroll) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
