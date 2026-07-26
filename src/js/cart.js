@@ -12,7 +12,6 @@ function normalizeCartItems(cartItems) {
 
 function buildCartItemMarkup(item) {
   if (item) {
-
     console.log(item);
 
     const imageSrc = item.Images?.PrimaryMedium || "";
@@ -61,22 +60,24 @@ function renderCartContents() {
   if (!productList) return;
 
   if (cartItems.length === 0) {
-    productList.innerHTML =
-      `<li class="cart-empty-message">Your cart is empty. <a href="/index.html">Continue shopping</a></li>`;
+    productList.innerHTML = `<li class="cart-empty-message">Your cart is empty. <a href="/index.html">Continue shopping</a></li>`;
     if (cartTotalElement) {
       cartTotalElement.textContent = "";
-    }   
+    }
     if (checkoutButton) {
       console.log(checkoutButton.style.display);
-      checkoutButton.style.display = cartItems.length > 0 ? "inline-block" : "none";
+      checkoutButton.style.display =
+        cartItems.length > 0 ? "inline-block" : "none";
     }
 
     return;
   }
 
-  productList.innerHTML = cartItems.map((item) => buildCartItemMarkup(item)).join("");
+  productList.innerHTML = cartItems
+    .map((item) => buildCartItemMarkup(item))
+    .join("");
   bindCartEvents();
-  renderCartTotal(cartItems);  
+  renderCartTotal(cartItems);
 }
 
 function renderCartTotal(cartItems) {
@@ -98,7 +99,9 @@ function bindCartEvents() {
   document.querySelectorAll(".update-quantity").forEach((button) => {
     button.addEventListener("click", () => {
       const itemId = button.dataset.id;
-      const input = document.querySelector(`.quantity-input[data-id="${itemId}"]`);
+      const input = document.querySelector(
+        `.quantity-input[data-id="${itemId}"]`,
+      );
       const newQuantity = parseInt(input.value, 10);
       if (newQuantity >= 1) {
         console.log(`Updating item ${itemId} to quantity ${newQuantity}`);

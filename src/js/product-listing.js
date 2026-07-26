@@ -7,7 +7,7 @@ loadHeaderFooter();
 const category = getParam("category");
 
 document.querySelector(".products h2").textContent =
-    `Top Products: ${category.charAt(0).toUpperCase() + category.slice(1)}`;
+  `Top Products: ${category.charAt(0).toUpperCase() + category.slice(1)}`;
 
 const dataSource = new ExternalServices();
 const listElement = document.querySelector(".product-list");

@@ -8,6 +8,6 @@ checkoutProcess.init();
 
 const checkoutForm = document.querySelector("#checkout-form");
 checkoutForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    checkoutProcess.checkout(checkoutForm);
+  event.preventDefault();
+  checkoutProcess.checkout(checkoutForm);
 });
