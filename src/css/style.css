@@ -189,6 +189,13 @@ button {
   max-width: 250px;
 }
 
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
 .product-card__discount-flag {
   position: absolute;
   top: 8px;
