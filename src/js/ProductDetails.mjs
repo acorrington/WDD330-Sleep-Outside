@@ -30,6 +30,7 @@ export default class ProductDetails {
             cartItems[existingItemIndex].Quantity = (Number(cartItems[existingItemIndex].Quantity) || 1) + 1;
         } else {
             // If the product is not in the cart, add it
+            this.product.Quantity = 1;
             cartItems.push(this.product);
         }
         setLocalStorage("so-cart", cartItems);

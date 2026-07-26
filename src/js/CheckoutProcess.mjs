@@ -1,4 +1,5 @@
 import { getLocalStorage } from "./utils.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 
 export default class CheckoutProcess {
     constructor(key, outputSelector) {
@@ -51,4 +52,67 @@ export default class CheckoutProcess {
         this.calculateOrderTotal();
         this.displayOrderTotals();
     }
-}
+
+    // takes the items currently stored in the cart (localstorage) and returns them in a simplified form.
+    packageItems(items) {
+        // convert the list of products from localStorage to the simpler form required for the checkout process.
+        // An Array.map would be perfect for this process.
+        return items.map((item) => ({
+            id: item.Id,
+            name: item.NameWithoutBrand,
+            price: item.FinalPrice,
+            quantity: item.Quantity
+        }));
+    }
+
+    async checkout(form) {
+        const formData = this.formDataToJSON(form);
+        console.log(`Form data: ${JSON.stringify(formData)}`);
+
+        // convert the form data to a JSON order object using the formDataToJSON function
+        const orderData = {
+            fname: formData.fname,
+            lname: formData.lname,
+            street: formData.street,
+            city: formData.city,
+            state: formData.state,
+            zip: formData.zip,
+            cardNumber: formData.cardNumber,
+            expiration: formData.expiration,
+            code: formData.code,
+
+            // adding the checkout-specific fields
+            orderDate: new Date().toISOString(),
+            orderTotal: "",
+            tax: "",
+            shipping: 0,
+            items: []
+        };
+
+        // populate the JSON order object with the order Date, orderTotal, tax, shipping, and list of items
+        const checkoutProcess = new CheckoutProcess("so-cart", ".order-summary");
+        checkoutProcess.init();
+        orderData.orderTotal = checkoutProcess.orderTotal.toString();;
+        orderData.tax = checkoutProcess.tax.toString();
+        orderData.shipping = checkoutProcess.shipping;
+        const cartItems = getLocalStorage("so-cart");
+        orderData.items = this.packageItems(cartItems);
+
+        // call the checkout method in the ExternalServices module and send it the JSON order data.
+        const services = new ExternalServices();
+        await services.checkout(orderData);
+    }
+
+    // takes a form element and returns an object where the key is the "name" of the form input.
+    formDataToJSON(formElement) {
+        const formData = new FormData(formElement),
+            convertedJSON = {};
+
+        formData.forEach(function (value, key) {
+            convertedJSON[key] = value;
+        });
+
+        return convertedJSON;
+    }
+};
+
