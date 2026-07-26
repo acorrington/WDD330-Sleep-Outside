@@ -60,7 +60,6 @@ export async function loadTemplate(path) {
 }
 
 export async function loadHeaderFooter() {
-
   const headerTemplate = await loadTemplate("/partials/header.html");
   const footerTemplate = await loadTemplate("/partials/footer.html");
 
@@ -69,6 +68,8 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
+
+  updateCartCount();
 }
 
 // displays a dismissible alert message at the top of <main>
@@ -87,5 +88,19 @@ export function alertMessage(message, scroll = true) {
 
   if (scroll) {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
+export function updateCartCount() {
+  const cartItems = getLocalStorage("so-cart");
+  const count = Array.isArray(cartItems)
+    ? cartItems.length
+    : cartItems
+      ? 1
+      : 0;
+
+  const cartCountElement = document.querySelector("#cart-count");
+  if (cartCountElement) {
+    cartCountElement.textContent = count > 0 ? count : "";
   }
 }
