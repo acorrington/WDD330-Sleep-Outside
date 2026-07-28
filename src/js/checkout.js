@@ -7,13 +7,11 @@ const checkout = new CheckoutProcess("so-cart", ".checkout-container");
 checkout.init();
 
 document.querySelector("#zip").addEventListener("blur", () => {
-    checkout.calculateOrdertotal();
+  checkout.calculateOrdertotal();
 });
 
-document
-    .querySelector("#checkout-form")
-    .addEventListener("submit", (event) => {
-        event.preventDefault();
-        const form = event.target;
-        checkout.checkout(form);
-    });
+document.querySelector("#checkout-form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  const form = event.target;
+  checkout.checkout(form);
+});

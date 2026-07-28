@@ -215,10 +215,6 @@ button {
   margin: 0.5em 0;
 }
 
-.card__brand {
-  font-size: var(--small-font);
-}
-
 .card__name {
   font-size: 1em;
 }
@@ -382,26 +378,101 @@ button {
 }
 
 .checkout-form fieldset {
-  margin-bottom: 1rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.checkout-form legend {
+  font-weight: bold;
+  font-size: var(--large-font);
+  color: var(--dark-grey);
+  padding: 0 0.5rem;
 }
 
 .checkout-form label {
   display: block;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--dark-grey);
+}
+
+.checkout-form label:first-child {
+  margin-top: 0;
 }
 
 .checkout-form input {
   width: 100%;
-  padding: 0.4rem;
-  margin-top: 0.25rem;
+  padding: 0.6rem 0.75rem;
+  margin-top: 0.35rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  color: var(--dark-grey);
+  background: #fff;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.checkout-form input:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 3px rgba(82, 91, 15, 0.15);
+}
+
+.checkout-form input::placeholder {
+  color: #999;
+}
+
+.checkout-form #checkoutSubmitBtn {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.85rem 2rem;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: var(--large-font);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.checkout-form #checkoutSubmitBtn:hover {
+  background-color: #3d450b;
 }
 
 .order-summary {
   flex: 1;
-  min-width: 200px;
-  border: 1px solid #ccc;
-  padding: 1rem;
-  border-radius: 4px;
+  min-width: 220px;
+  border: 1px solid var(--light-grey);
+  padding: 1.5rem;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.order-summary h2 {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.order-summary p {
+  padding: 0.4rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-summary p:last-child {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--light-grey);
+  font-weight: bold;
+  font-size: var(--large-font);
 }
 
 .alert {

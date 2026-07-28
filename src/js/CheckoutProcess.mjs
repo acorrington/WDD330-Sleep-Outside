@@ -8,7 +8,7 @@ function packageItems(items) {
         id: item.Id,
         name: item.Name,
         price: item.FinalPrice,
-        quantity: 1,
+        quantity: item.quantity,
     }));
 }
 
@@ -36,7 +36,7 @@ export default class CheckoutProcess {
 
     init() {
         this.list = getLocalStorage(this.key);
-        this.calculateItemSummary();
+        this.calculateOrderTotal();
     }
 
     calculateItemSummary() {
@@ -52,17 +52,26 @@ export default class CheckoutProcess {
         cartTotalElement.textContent = `$${this.itemTotal.toFixed(2)}`;
     }
 
-    calculateOrdertotal() {
+    calculateOrderTotal() {
         const itemCount = this.list.length;
 
+        this.itemTotal = this.list.reduce(
+            (sum, item) => sum + item.FinalPrice,
+            0
+        );
         this.shipping = itemCount > 0 ? 10 + (itemCount - 1) * 2 : 0;
         this.tax = this.itemTotal * 0.06;
         this.orderTotal = this.itemTotal + this.tax + this.shipping;
+
+        console.log(this.itemTotal, this.tax, this.shipping, this.orderTotal);
 
         this.displayOrderTotals();
     }
 
     displayOrderTotals() {
+        const cartTotalElement = document.querySelector(
+            `${this.outputSelector} #cartTotal`
+        );
         const taxElement = document.querySelector(`${this.outputSelector} #tax`);
         const shippingElement = document.querySelector(
             `${this.outputSelector} #shipping`
@@ -71,6 +80,10 @@ export default class CheckoutProcess {
             `${this.outputSelector} #orderTotal`
         );
 
+        this.itemTotal = this.list.reduce(
+            (sum, item) => sum + item.FinalPrice,
+            0
+        );
         taxElement.textContent = `$${this.tax.toFixed(2)}`;
         shippingElement.textContent = `$${this.shipping.toFixed(2)}`;
         orderTotalElement.textContent = `$${this.orderTotal.toFixed(2)}`;
