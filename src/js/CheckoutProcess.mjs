@@ -52,6 +52,8 @@ export default class CheckoutProcess {
             const quantity = Number(item.Quantity || 1);
             return total + unitPrice * quantity;
         }, 0);
+
+        console.log(this.itemTotal);
     }
 
     calculateOrderTotal() {
