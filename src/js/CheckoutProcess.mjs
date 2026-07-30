@@ -22,7 +22,7 @@ function packageItems(items) {
             id: item.Id,
             price: item.FinalPrice,
             name: item.Name,
-            quantity: 1
+            quantity: item.quantity || 1
         };
     });
     return simplifiedItems;
@@ -52,17 +52,19 @@ export default class CheckoutProcess {
         const itemNumElement = document.querySelector(
             this.outputSelector + " #num-items"
         );
-        itemNumElement.innerText = this.list.length;
+        itemNumElement.innerText = this.list.reduce((sum, item) => sum + (item.quantity || 1), 0);
         // calculate the total of all the items in the cart
-        const amounts = this.list.map((item) => item.FinalPrice);
+        const amounts = this.list.map((item) => item.FinalPrice * (item.quantity || 1));
         this.itemTotal = amounts.reduce((sum, item) => sum + item);
         summaryElement.innerText = `$${this.itemTotal}`;
     }
 
     calculateOrderTotal() {
         // calculate the tax and shipping amounts. Add those to the cart total to figure out the order total
+        const totalItemsCount = this.list.reduce((sum, item) => sum + (item.quantity || 1), 0);
+
         this.tax = (this.itemTotal * 0.06);
-        this.shipping = 10 + (this.list.length - 1) * 2;
+        this.shipping = 10 + (totalItemsCount - 1) * 2;
         this.orderTotal = (
             parseFloat(this.itemTotal) +
             parseFloat(this.tax) +
@@ -92,7 +94,7 @@ export default class CheckoutProcess {
         order.tax = this.tax;
         order.shipping = this.shipping;
         order.items = packageItems(this.list);
-        //console.log(order);
+        // console.log(order);
 
         try {
             const response = await services.checkout(order);
