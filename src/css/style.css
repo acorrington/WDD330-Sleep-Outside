@@ -114,6 +114,11 @@ button {
   border: 0;
   font-size: var(--large-font);
   cursor: pointer;
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
 }
 
 .divider {
