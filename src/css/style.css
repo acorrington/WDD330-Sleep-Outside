@@ -197,6 +197,36 @@ button {
   color: var(--dark-grey);
 }
 
+/* checkout styles */
+.checkout-form {
+  padding: 0.5em;
+}
+
+.checkout-form label {
+  display: block;
+}
+
+.checkout-form input {
+  width: 100%;
+  font-size: 1.2em;
+}
+
+.checkout-summary > ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.checkout-summary li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkout-summary input {
+  width: 25%;
+  font-size: 1em;
+}
+
 /* Styles for product lists */
 .product-card {
   flex: 1 1 45%;
@@ -277,6 +307,20 @@ button {
 
 .hide {
   display: none;
+}
+
+/* alert styles */
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5em;
+  background-color: var(--primary-color);
+  border: 1px solid darkorange;
+}
+
+.alert > p {
+  margin: 0;
 }
 
 @media screen and (min-width: 500px) {
