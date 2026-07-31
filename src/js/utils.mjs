@@ -81,6 +81,39 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
+
+  updateCartCount();
 }
 
+// displays a dismissible alert message at the top of <main>
+// scroll=true (default) scrolls the page to the top so mobile users see it
+export function alertMessage(message, scroll = true) {
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+  alert.innerHTML = `<p>${message}</p><span class="alert-close">&times;</span>`;
 
+  const main = document.querySelector("main");
+  main.prepend(alert);
+
+  alert.querySelector(".alert-close").addEventListener("click", () => {
+    alert.remove();
+  });
+
+  if (scroll) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
+export function updateCartCount() {
+  const cartItems = getLocalStorage("so-cart");
+  const count = Array.isArray(cartItems)
+    ? cartItems.length
+    : cartItems
+      ? 1
+      : 0;
+
+  const cartCountElement = document.querySelector("#cart-count");
+  if (cartCountElement) {
+    cartCountElement.textContent = count > 0 ? count : "";
+  }
+}
