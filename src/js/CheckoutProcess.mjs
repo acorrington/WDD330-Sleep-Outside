@@ -8,7 +8,7 @@ function packageItems(items) {
         id: item.Id,
         name: item.Name,
         price: item.FinalPrice,
-        quantity: item.quantity,
+        quantity: item.Quantity,
     }));
 }
 
@@ -52,7 +52,7 @@ export default class CheckoutProcess {
             const quantity = Number(item.Quantity || 1);
 
             return total + unitPrice * quantity;
-        }, 0);        
+        }, 0);
     }
 
     calculateOrderTotal() {
