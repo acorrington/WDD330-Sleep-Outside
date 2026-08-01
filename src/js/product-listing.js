@@ -4,10 +4,11 @@ import { loadHeaderFooter, getParam } from "./utils.mjs";
 
 loadHeaderFooter();
 
-const category = getParam("category");
+const category = getParam("category") || "tents";
 
+const displayCategory = category.replace("-", " ");
 document.querySelector(".products h2").textContent =
-  `Top Products: ${category.charAt(0).toUpperCase() + category.slice(1)}`;
+  `Top Products: ${displayCategory.charAt(0).toUpperCase() + displayCategory.slice(1)}`;
 
 const dataSource = new ExternalServices();
 const listElement = document.querySelector(".product-list");
