@@ -33,7 +33,56 @@ img {
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0.5rem;
+}
+
+.search-bar {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+.search-bar form {
+  display: flex;
+  width: 100%;
+  max-width: 400px;
+}
+
+.search-bar input[type="search"] {
+  flex-grow: 1;
+  padding: 0.5rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 4px 0 0 4px;
+  font-size: 1rem;
+}
+
+.search-bar button {
+  padding: 0.5rem 1rem;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  margin: 0;
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 600px) {
+  header {
+    flex-wrap: wrap;
+  }
+
+  .search-bar {
+    order: 3;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .search-bar form {
+    max-width: 100%;
+  }
 }
 
 p {
