@@ -323,6 +323,68 @@ button {
   margin: 0;
 }
 
+#mydialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2rem;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 500px;
+  background-color: #ffffff;
+  margin: 0;
+}
+
+#mydialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.dialog-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.dialog-close-btn {
+  background-color: #f8f9fa;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #444;
+  padding: 0.25rem 0.6rem;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.dialog-close-btn:hover {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+  color: #000;
+}
+
+#mydialog p {
+  margin: 0;
+  color: #555;
+  line-height: 1.5;
+}
+
+.modal-btn {
+  font-size: var(--small-font);
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

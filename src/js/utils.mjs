@@ -29,13 +29,18 @@ export function getParam(param) {
   const product = urlParams.get(param);
   return product
 }
-export function renderListWithTemplate(template, parentElement, list, position = "afterbegin", clear = false) {
-  const htmlStrings = list.map(template);
+export function renderListWithTemplate(template, parentElement, list, position = "afterbegin", clear = false, callback) {
+  const htmlStrings = list.map((item) => {
+    return template(item)
+  });
   // if clear is true we need to clear out the contents of the parent.
   if (clear) {
     parentElement.innerHTML = "";
   }
   parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
+  if (callback) {
+    callback(list)
+  }
 }
 export function renderWithTemplate(template, parentElement, data, callback) {
   parentElement.innerHTML = template;
@@ -90,4 +95,13 @@ export function alertMessage(message, scroll = true, duration = 3000) {
 export function removeAllAlerts() {
   const alerts = document.querySelectorAll(".alert");
   alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
+}
+export function displayQuickView(product) {
+  const myDialog = document.querySelector("#mydialog");
+  const brandAndName = document.querySelector("#mydialog h3");
+  const description = document.querySelector("#mydialog p");
+
+  brandAndName.textContent = `${product.Brand.Name} ${product.NameWithoutBrand}`;
+  description.innerHTML = product.DescriptionHtmlSimple;
+  myDialog.showModal();
 }
